@@ -26,7 +26,7 @@ export const fetchUserDetails = async (accessToken: string | null) => {
 };
 
 export const fetchContactList = async (accessToken: string | null) => {
-  const response = await axios.get(`${API_BASE_URL}/dashboard/contacts`, {
+  const response = await axios.get(`${API_BASE_URL}/contacts`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
@@ -38,16 +38,12 @@ export const addContact = async (
   accessToken: string | null,
   payload: ContactFormData
 ) => {
-  const response = await axios.post(
-    `${API_BASE_URL}/dashboard/contacts`,
-    payload,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
+  const response = await axios.post(`${API_BASE_URL}/contacts`, payload, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
     }
-  );
+  });
   return response.data;
 };
 
@@ -55,15 +51,12 @@ export const deleteContact = async (
   accessToken: string | null,
   contactId: string
 ) => {
-  const response = await axios.delete(
-    `${API_BASE_URL}/dashboard/contacts/${contactId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
+  const response = await axios.delete(`${API_BASE_URL}/contacts/${contactId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
     }
-  );
+  });
   return response.data;
 };
 
@@ -73,7 +66,7 @@ export const updateContact = async (
   payload: ContactFormData
 ) => {
   const response = await axios.put(
-    `${API_BASE_URL}/dashboard/contacts/${contactId}`,
+    `${API_BASE_URL}/contacts/${contactId}`,
     payload,
     {
       headers: {
