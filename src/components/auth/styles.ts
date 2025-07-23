@@ -20,7 +20,7 @@ export const FormContainer = styled.div`
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
+
   @media (max-width: 768px) {
     margin-right: 0;
     width: 100%;
@@ -40,24 +40,49 @@ export const LinkedText = styled.span`
   color: blue;
   text-align: left;
   cursor: pointer;
-`
+`;
 
 export const StyledField = styled.input<{ hasError?: boolean }>`
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid ${props => props.hasError ? '#e74c3c' : '#ddd'};
+  border: 2px solid ${props => (props.hasError ? '#e74c3c' : '#ddd')};
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  background-color: #fff;
+  color: black;
+
+  /* Override autofill styles */
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333 !important;
+    background-color: #ffffff !important;
+  }
+
+  &:-webkit-autofill:hover {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+
+  /* For other browsers */
+  &:autofill {
+    background-color: #ffffff !important;
+    color: #333 !important;
+  }
 
   &:focus {
     outline: none;
-    border-color: ${props => props.hasError ? '#e74c3c' : '#3498db'};
+    border-color: ${props => (props.hasError ? '#e74c3c' : '#3498db')};
   }
 
   &::placeholder {
-    color: #999;
+    color: black;
   }
 `;
 

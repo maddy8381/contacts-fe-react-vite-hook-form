@@ -11,7 +11,7 @@ export const COUNTRY_CODES: CountryCode[] = [
   { code: '+39', country: 'Italy' },
   { code: '+61', country: 'Australia' },
   { code: '+86', country: 'China' },
-  { code: '+82', country: 'South Korea' },
+  { code: '+82', country: 'South Korea' }
 ];
 
 export const VALIDATION_RULES = {
@@ -34,7 +34,8 @@ export const VALIDATION_RULES = {
     },
     PATTERN: {
       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-      message: 'Password must contain at least one uppercase letter, one lowercase letter, and one number'
+      message:
+        'Password must contain at least one uppercase letter, one lowercase letter, and one number'
     }
   },
   PHONE: {

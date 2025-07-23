@@ -1,6 +1,6 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import {
   FormContainer,
   Title,
@@ -9,13 +9,13 @@ import {
   SubmitButton,
   FieldWrapper,
   PageContainer,
-  LinkedText,
-} from "../styles";
-import { ROUTES } from "../../../constants";
-import { newSignUpRequest } from "../../../utils/networkCalls";
-import { useAuth } from "../../../context/auth/useAuth";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
+  LinkedText
+} from '../styles';
+import { ROUTES } from '../../../constants';
+import { newSignUpRequest } from '../../../utils/networkCalls';
+import { useAuth } from '../../../context/auth/useAuth';
+import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 interface FormData {
   fullName: string;
@@ -28,7 +28,7 @@ const SignupPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm<FormData>();
   const { setAccessToken } = useAuth();
 
@@ -40,16 +40,20 @@ const SignupPage: React.FC = () => {
       if (response) {
         const accessToken = response.accessToken;
         setAccessToken(accessToken);
+        toast.success('Signup successful!', {
+          duration: 2000,
+          position: 'top-right'
+        });
       }
       navigate(ROUTES.DASHBOARD);
     } catch (err) {
       toast.error(
         err instanceof AxiosError
           ? err?.response?.data?.message
-          : "Something went wrong",
+          : 'Something went wrong',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     }
@@ -69,12 +73,12 @@ const SignupPage: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldWrapper>
             <StyledField
-              {...register("fullName", {
-                required: "Full name is required",
+              {...register('fullName', {
+                required: 'Full name is required',
                 minLength: {
                   value: 2,
-                  message: "Full name must be at least 2 characters",
-                },
+                  message: 'Full name must be at least 2 characters'
+                }
               })}
               type="text"
               placeholder="Full Name"
@@ -87,12 +91,12 @@ const SignupPage: React.FC = () => {
 
           <FieldWrapper>
             <StyledField
-              {...register("email", {
-                required: "Email is required",
+              {...register('email', {
+                required: 'Email is required',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
+                  message: 'Invalid email address'
+                }
               })}
               type="email"
               placeholder="Email Address"
@@ -105,18 +109,18 @@ const SignupPage: React.FC = () => {
 
           <FieldWrapper>
             <StyledField
-              {...register("password", {
-                required: "Password is required",
+              {...register('password', {
+                required: 'Password is required',
                 minLength: {
                   value: 8,
-                  message: "Password must be at least 8 characters",
+                  message: 'Password must be at least 8 characters'
                 },
                 pattern: {
                   value:
                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
                   message:
-                    "Password must contain at least one uppercase letter, one lowercase letter, and one number",
-                },
+                    'Password must contain at least one uppercase letter, one lowercase letter, and one number'
+                }
               })}
               type="password"
               placeholder="Password"
@@ -129,12 +133,12 @@ const SignupPage: React.FC = () => {
 
           <FieldWrapper>
             <StyledField
-              {...register("mobileNumber", {
-                required: "Mobile number is required",
+              {...register('mobileNumber', {
+                required: 'Mobile number is required',
                 pattern: {
                   value: /^\+?[1-9]\d{1,14}$/,
-                  message: "Invalid mobile number format",
-                },
+                  message: 'Invalid mobile number format'
+                }
               })}
               type="tel"
               placeholder="Mobile Number"
@@ -146,7 +150,7 @@ const SignupPage: React.FC = () => {
           </FieldWrapper>
 
           <SubmitButton type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Signing Up..." : "Sign Up"}
+            {isSubmitting ? 'Signing Up...' : 'Sign Up'}
           </SubmitButton>
         </form>
       </FormContainer>

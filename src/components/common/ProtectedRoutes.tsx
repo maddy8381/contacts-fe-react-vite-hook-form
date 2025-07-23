@@ -1,7 +1,7 @@
-import React, { type JSX } from "react";
-import { useAuth } from "../../context/auth/useAuth";
-import { Navigate } from "react-router-dom";
-import { ROUTES } from "../../constants";
+import React, { type JSX } from 'react';
+import { useAuth } from '../../context/auth/useAuth';
+import { Navigate } from 'react-router-dom';
+import { ROUTES } from '../../constants';
 
 interface ProtectedRouteProps {
   children: JSX.Element;

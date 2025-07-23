@@ -1,6 +1,6 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import {
   FormContainer,
   Title,
@@ -9,13 +9,13 @@ import {
   SubmitButton,
   FieldWrapper,
   PageContainer,
-  LinkedText,
-} from "../styles";
-import { ROUTES } from "../../../constants";
-import { newSignInRequest } from "../../../utils/networkCalls";
-import { useAuth } from "../../../context/auth/useAuth";
-import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+  LinkedText
+} from '../styles';
+import { ROUTES } from '../../../constants';
+import { newSignInRequest } from '../../../utils/networkCalls';
+import { useAuth } from '../../../context/auth/useAuth';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 interface FormData {
   email: string;
@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm<FormData>();
   const navigate = useNavigate();
   const { setAccessToken } = useAuth();
@@ -35,6 +35,10 @@ const LoginPage: React.FC = () => {
     try {
       const response = await newSignInRequest(data);
       if (response) {
+        toast.success('Login successfully!', {
+          duration: 2000,
+          position: 'top-right'
+        });
         const accessToken = response.accessToken;
         setAccessToken(accessToken);
         navigate(ROUTES.DASHBOARD);
@@ -43,10 +47,10 @@ const LoginPage: React.FC = () => {
       toast.error(
         err instanceof AxiosError
           ? err?.response?.data?.message
-          : "Email id or password is incorrect",
+          : 'Email id or password is incorrect',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     }
@@ -67,12 +71,12 @@ const LoginPage: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldWrapper>
             <StyledField
-              {...register("email", {
-                required: "Email is required",
+              {...register('email', {
+                required: 'Email is required',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
+                  message: 'Invalid email address'
+                }
               })}
               type="email"
               placeholder="Email Address"
@@ -85,12 +89,12 @@ const LoginPage: React.FC = () => {
 
           <FieldWrapper>
             <StyledField
-              {...register("password", {
-                required: "Password is required",
+              {...register('password', {
+                required: 'Password is required',
                 minLength: {
                   value: 6,
-                  message: "Password must be at least 6 characters",
-                },
+                  message: 'Password must be at least 6 characters'
+                }
               })}
               type="password"
               placeholder="Password"
@@ -102,7 +106,7 @@ const LoginPage: React.FC = () => {
           </FieldWrapper>
 
           <SubmitButton type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Signing In..." : "Sign In"}
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
           </SubmitButton>
         </form>
       </FormContainer>

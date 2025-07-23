@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   ActionButton,
   ActionContainer,
@@ -15,20 +15,20 @@ import {
   Thead,
   Tr,
   UserName,
-  UserNameContainer,
-} from "./styles";
-import { useAuth } from "../../context/auth/useAuth";
+  UserNameContainer
+} from './styles';
+import { useAuth } from '../../context/auth/useAuth';
 import {
   deleteContact,
   fetchContactList,
-  fetchUserDetails,
-} from "../../utils/networkCalls";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../constants";
-import AddContact from "../contacts/AddContact";
-import { Edit, Trash2 } from "lucide-react";
-import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+  fetchUserDetails
+} from '../../utils/networkCalls';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../constants';
+import AddContact from '../contacts/AddContact';
+import { Edit, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 interface IContact {
   name: string;
@@ -61,10 +61,10 @@ const Dashboard: React.FC = () => {
       toast.error(
         error instanceof AxiosError
           ? error?.response?.data?.message
-          : "Error fetching contact list",
+          : 'Error fetching contact list',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     }
@@ -80,10 +80,10 @@ const Dashboard: React.FC = () => {
       toast.error(
         error instanceof AxiosError
           ? error?.response?.data?.message
-          : "Error fetching user details",
+          : 'Error fetching user details',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     }
@@ -98,9 +98,9 @@ const Dashboard: React.FC = () => {
   const handleLogout = () => {
     setAccessToken(null);
     navigate(ROUTES.LOGIN);
-    toast.success("Logout successfully!", {
+    toast.success('Logout successfully!', {
       duration: 2000,
-      position: "top-right",
+      position: 'top-right'
     });
   };
 
@@ -122,19 +122,19 @@ const Dashboard: React.FC = () => {
         const updatedList = userContactList.filter((_, i) => i !== index);
         setUserContactList(updatedList);
 
-        toast.success("Contact deleted successfully!", {
+        toast.success('Contact deleted successfully!', {
           duration: 2000,
-          position: "top-right",
+          position: 'top-right'
         });
       }
     } catch (err) {
       toast.error(
         err instanceof AxiosError
           ? err?.response?.data?.message
-          : "Error in deleting contact",
+          : 'Error in deleting contact',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     }

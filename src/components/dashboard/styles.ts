@@ -29,7 +29,7 @@ export const Logo = styled.div`
   font-weight: bold;
   color: #3498db;
   cursor: pointer;
-  
+
   &:hover {
     color: #2980b9;
   }
@@ -38,9 +38,9 @@ export const Logo = styled.div`
 export const UserNameContainer = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 export const UserName = styled.div`
-   margin-right: 1rem;
+  margin-right: 1rem;
   font-weight: 500;
   color: #333;
   @media (max-width: 550px) {
@@ -74,7 +74,7 @@ export const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   h1 {
     color: #333;
     font-size: 2rem;
@@ -94,26 +94,26 @@ export const TableWrapper = styled.div`
   overflow-x: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
+
   /* Custom scrollbar styling */
   &::-webkit-scrollbar {
     height: 8px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
   }
-  
+
   @media (max-width: 768px) {
     max-width: 95%;
   }
@@ -128,7 +128,7 @@ export const Table = styled.table`
 `;
 
 export const Thead = styled.thead`
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 `;
 
@@ -144,10 +144,11 @@ export const Td = styled.td`
   padding: 12px;
   border: 1px solid #ddd;
   white-space: nowrap; /* Prevents cell content from wrapping */
-  
+
   /* Allow text wrapping for certain columns if needed */
   &:nth-child(1), /* Name column */
-  &:nth-child(2) {  /* Email column */
+  &:nth-child(2) {
+    /* Email column */
     white-space: normal;
     word-break: break-word;
     min-width: 150px;
@@ -177,22 +178,23 @@ export const ActionButton = styled.button<{ type: 'edit' | 'delete' }>`
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: ${props => props.type === 'edit' ? '#3498db' : '#e74c3c'};
+  background-color: ${props => (props.type === 'edit' ? '#3498db' : '#e74c3c')};
   color: white;
   min-width: 32px;
   min-height: 32px;
-  
+
   &:hover {
-    background-color: ${props => props.type === 'edit' ? '#2980b9' : '#c0392b'};
+    background-color: ${props =>
+      props.type === 'edit' ? '#2980b9' : '#c0392b'};
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
-  
+
   &:active {
     transform: translateY(0);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);

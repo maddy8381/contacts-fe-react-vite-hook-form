@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { AuthContext } from "./AuthContext";
+import React, { useState } from 'react';
+import { AuthContext } from './AuthContext';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
+  children
 }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 

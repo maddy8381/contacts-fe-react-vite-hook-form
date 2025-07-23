@@ -65,7 +65,6 @@ export const Title = styled.h2`
   line-height: 1.2;
 `;
 
-
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
@@ -100,7 +99,7 @@ export const InputIcon = styled.div`
 export const Input = styled.input<{ hasError?: boolean }>`
   width: 100%;
   padding: 16px 16px 16px 48px;
-  border: 2px solid ${props => props.hasError ? '#ef4444' : '#e5e7eb'};
+  border: 2px solid ${props => (props.hasError ? '#ef4444' : '#e5e7eb')};
   border-radius: 12px;
   font-size: 16px;
   transition: all 0.2s ease;
@@ -109,8 +108,10 @@ export const Input = styled.input<{ hasError?: boolean }>`
 
   &:focus {
     outline: none;
-    border-color: ${props => props.hasError ? '#ef4444' : '#3b82f6'};
-    box-shadow: 0 0 0 3px ${props => props.hasError ? 'rgba(239, 68, 68, 0.1)' : 'rgba(59, 130, 246, 0.1)'};
+    border-color: ${props => (props.hasError ? '#ef4444' : '#3b82f6')};
+    box-shadow: 0 0 0 3px
+      ${props =>
+        props.hasError ? 'rgba(239, 68, 68, 0.1)' : 'rgba(59, 130, 246, 0.1)'};
   }
 
   &::placeholder {
@@ -137,7 +138,7 @@ export const SubmitButton = styled.button<{ isSubmitting?: boolean }>`
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 8px;
-  opacity: ${props => props.isSubmitting ? 0.7 : 1};
+  opacity: ${props => (props.isSubmitting ? 0.7 : 1)};
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
@@ -166,11 +167,10 @@ export const OpenButton = styled.button`
   }
 `;
 
-
 export const AddContactForm = styled.div`
-    width: 80%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-`
+  width: 80%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+`;

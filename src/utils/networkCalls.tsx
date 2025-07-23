@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -15,8 +15,8 @@ export const newSignInRequest = async (payload: unknown) => {
 export const fetchUserDetails = async (accessToken: string | null) => {
   const response = await axios.get(`${API_BASE_URL}/dashboard`, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+      Authorization: `Bearer ${accessToken}`
+    }
   });
   return response.data;
 };
@@ -24,8 +24,8 @@ export const fetchUserDetails = async (accessToken: string | null) => {
 export const fetchContactList = async (accessToken: string | null) => {
   const response = await axios.get(`${API_BASE_URL}/dashboard/contacts`, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+      Authorization: `Bearer ${accessToken}`
+    }
   });
   return response.data;
 };
@@ -44,8 +44,8 @@ export const addContact = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json'
+      }
     }
   );
   return response.data;
@@ -60,8 +60,8 @@ export const deleteContact = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json'
+      }
     }
   );
   return response.data;
@@ -82,8 +82,8 @@ export const updateContact = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json'
+      }
     }
   );
   return response.data;

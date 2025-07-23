@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { X, Mail, User, Phone } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { X, Mail, User, Phone } from 'lucide-react';
 import {
   AddContactForm,
   CloseButton,
@@ -15,12 +15,12 @@ import {
   ModalOverlay,
   OpenButton,
   SubmitButton,
-  Title,
-} from "./style";
-import { addContact, updateContact } from "../../utils/networkCalls";
-import { useAuth } from "../../context/auth/useAuth";
-import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+  Title
+} from './style';
+import { addContact, updateContact } from '../../utils/networkCalls';
+import { useAuth } from '../../context/auth/useAuth';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 interface FormData {
   name: string;
@@ -48,7 +48,7 @@ const AddContact: React.FC<AddContactProps> = ({
   contactToEdit = null,
   onContactUpdated,
   onOpenEdit,
-  isEditModalOpen = false,
+  isEditModalOpen = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,9 +59,9 @@ const AddContact: React.FC<AddContactProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+    setValue
   } = useForm<FormData>({
-    mode: "onBlur",
+    mode: 'onBlur'
   });
 
   // Handle edit mode modal state
@@ -70,9 +70,9 @@ const AddContact: React.FC<AddContactProps> = ({
       setIsOpen(true);
       // Pre-fill form with contact data
       if (contactToEdit) {
-        setValue("name", contactToEdit.name);
-        setValue("email", contactToEdit.email);
-        setValue("mobileNumber", contactToEdit.mobileNumber);
+        setValue('name', contactToEdit.name);
+        setValue('email', contactToEdit.email);
+        setValue('mobileNumber', contactToEdit.mobileNumber);
       }
     }
   }, [isEditMode, isEditModalOpen, contactToEdit, setValue]);
@@ -89,9 +89,9 @@ const AddContact: React.FC<AddContactProps> = ({
           data
         );
         if (response?.success) {
-          toast.success("Contact updated successfully!", {
+          toast.success('Contact updated successfully!', {
             duration: 4000,
-            position: "top-right",
+            position: 'top-right'
           });
           onContactUpdated?.(); // Refresh the contact list
         }
@@ -99,9 +99,9 @@ const AddContact: React.FC<AddContactProps> = ({
         // Add new contact
         const response = await addContact(accessToken, data);
         if (response?.success) {
-          toast.success("Contact added successfully!", {
+          toast.success('Contact added successfully!', {
             duration: 4000,
-            position: "top-right",
+            position: 'top-right'
           });
           onContactUpdated?.(); // Refresh the contact list
         }
@@ -112,10 +112,10 @@ const AddContact: React.FC<AddContactProps> = ({
       toast.error(
         err instanceof AxiosError
           ? err?.response?.data?.message
-          : "Error in adding or updating contact",
+          : 'Error in adding or updating contact',
         {
           duration: 4000,
-          position: "top-right",
+          position: 'top-right'
         }
       );
     } finally {
@@ -157,7 +157,7 @@ const AddContact: React.FC<AddContactProps> = ({
               <X size={24} />
             </CloseButton>
 
-            <Title>{isEditMode ? "Edit contact" : "Add contact"}</Title>
+            <Title>{isEditMode ? 'Edit contact' : 'Add contact'}</Title>
 
             <FormContainer>
               <InputGroup>
@@ -171,12 +171,12 @@ const AddContact: React.FC<AddContactProps> = ({
                     type="text"
                     placeholder="Enter contact name"
                     hasError={!!errors.name}
-                    {...register("name", {
-                      required: "Name is required",
+                    {...register('name', {
+                      required: 'Name is required',
                       minLength: {
                         value: 2,
-                        message: "Name must be at least 2 characters",
-                      },
+                        message: 'Name must be at least 2 characters'
+                      }
                     })}
                   />
                 </InputContainer>
@@ -196,12 +196,12 @@ const AddContact: React.FC<AddContactProps> = ({
                     type="email"
                     placeholder="Enter email address"
                     hasError={!!errors.email}
-                    {...register("email", {
-                      required: "Email is required",
+                    {...register('email', {
+                      required: 'Email is required',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
-                      },
+                        message: 'Invalid email address'
+                      }
                     })}
                   />
                 </InputContainer>
@@ -221,16 +221,16 @@ const AddContact: React.FC<AddContactProps> = ({
                     type="tel"
                     placeholder="Enter mobile number"
                     hasError={!!errors.mobileNumber}
-                    {...register("mobileNumber", {
-                      required: "Mobile number is required",
+                    {...register('mobileNumber', {
+                      required: 'Mobile number is required',
                       pattern: {
                         value: /^[+]?[\d\s\-()]+$/,
-                        message: "Invalid mobile number format",
+                        message: 'Invalid mobile number format'
                       },
                       minLength: {
                         value: 10,
-                        message: "Mobile number must be at least 10 digits",
-                      },
+                        message: 'Mobile number must be at least 10 digits'
+                      }
                     })}
                   />
                 </InputContainer>
@@ -247,11 +247,11 @@ const AddContact: React.FC<AddContactProps> = ({
               >
                 {isSubmitting
                   ? isEditMode
-                    ? "Updating contact..."
-                    : "Adding contact..."
+                    ? 'Updating contact...'
+                    : 'Adding contact...'
                   : isEditMode
-                  ? "Update contact"
-                  : "Add contact"}
+                    ? 'Update contact'
+                    : 'Add contact'}
               </SubmitButton>
             </FormContainer>
           </ModalContent>

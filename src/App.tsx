@@ -1,10 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ROUTES } from "./constants";
-import LoginPage from "./components/auth/login/LoginPage";
-import SignupPage from "./components/auth/signup/SignupPage";
-import Dashboard from "./components/dashboard/Dashboard";
-import ProtectedRoute from "./components/common/ProtectedRoutes";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ROUTES } from './constants';
+import LoginPage from './components/auth/login/LoginPage';
+import SignupPage from './components/auth/signup/SignupPage';
+import Dashboard from './components/dashboard/Dashboard';
+import ProtectedRoute from './components/common/ProtectedRoutes';
 
 const App: React.FC = () => {
   return (
