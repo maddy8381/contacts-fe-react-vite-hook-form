@@ -13,6 +13,7 @@ const App: React.FC = () => {
         <Route path={ROUTES.HOME} element={<LoginPage />} />
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
+        {/* Protected routes */}
         <Route
           path={ROUTES.DASHBOARD}
           element={

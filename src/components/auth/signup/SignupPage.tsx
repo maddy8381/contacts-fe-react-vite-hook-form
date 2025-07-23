@@ -1,6 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
+
 import {
   FormContainer,
   Title,
@@ -14,27 +17,19 @@ import {
 import { ROUTES } from '../../../constants';
 import { newSignUpRequest } from '../../../utils/networkCalls';
 import { useAuth } from '../../../context/auth/useAuth';
-import { AxiosError } from 'axios';
-import toast from 'react-hot-toast';
-
-interface FormData {
-  fullName: string;
-  email: string;
-  password: string;
-  mobileNumber: string;
-}
+import type { SignupFormData } from '../../../utils/interfaces';
 
 const SignupPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<FormData>();
-  const { setAccessToken } = useAuth();
+  } = useForm<SignupFormData>();
 
+  const { setAccessToken } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: SignupFormData) => {
     try {
       const response = await newSignUpRequest(data);
       if (response) {
@@ -62,6 +57,7 @@ const SignupPage: React.FC = () => {
   const handleSigninClick = () => {
     navigate(ROUTES.LOGIN);
   };
+
   return (
     <PageContainer>
       <FormContainer>

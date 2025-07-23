@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { X, Mail, User, Phone } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
+
 import {
   AddContactForm,
   CloseButton,
@@ -19,14 +22,7 @@ import {
 } from './style';
 import { addContact, updateContact } from '../../utils/networkCalls';
 import { useAuth } from '../../context/auth/useAuth';
-import toast from 'react-hot-toast';
-import { AxiosError } from 'axios';
-
-interface FormData {
-  name: string;
-  email: string;
-  mobileNumber: string;
-}
+import type { ContactFormData } from '../../utils/interfaces';
 
 interface IContact {
   name: string;
@@ -60,15 +56,13 @@ const AddContact: React.FC<AddContactProps> = ({
     formState: { errors },
     reset,
     setValue
-  } = useForm<FormData>({
+  } = useForm<ContactFormData>({
     mode: 'onBlur'
   });
 
-  // Handle edit mode modal state
   useEffect(() => {
     if (isEditMode && isEditModalOpen) {
       setIsOpen(true);
-      // Pre-fill form with contact data
       if (contactToEdit) {
         setValue('name', contactToEdit.name);
         setValue('email', contactToEdit.email);
@@ -77,10 +71,9 @@ const AddContact: React.FC<AddContactProps> = ({
     }
   }, [isEditMode, isEditModalOpen, contactToEdit, setValue]);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     try {
       setIsSubmitting(true);
-
       if (isEditMode && contactToEdit) {
         // Update existing contact
         const response = await updateContact(
@@ -140,7 +133,7 @@ const AddContact: React.FC<AddContactProps> = ({
   const handleOpenModal = () => {
     setIsOpen(true);
     if (!isEditMode) {
-      reset(); // Clear form for new contact
+      reset();
     }
   };
 

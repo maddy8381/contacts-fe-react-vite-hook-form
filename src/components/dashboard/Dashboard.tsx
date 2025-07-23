@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Edit, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 import {
   ActionButton,
   ActionContainer,
@@ -23,25 +28,9 @@ import {
   fetchContactList,
   fetchUserDetails
 } from '../../utils/networkCalls';
-import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants';
 import AddContact from '../contacts/AddContact';
-import { Edit, Trash2 } from 'lucide-react';
-import toast from 'react-hot-toast';
-import { AxiosError } from 'axios';
-
-interface IContact {
-  name: string;
-  email: string;
-  mobileNumber: string;
-  _id: string;
-}
-
-interface IUser {
-  fullName: string;
-  email: string;
-  mobileNumber: string;
-}
+import type { IContact, IUser } from '../../utils/interfaces';
 
 const Dashboard: React.FC = () => {
   const { accessToken, setAccessToken } = useAuth();

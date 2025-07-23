@@ -87,7 +87,6 @@ export const Heading = styled.h1`
   padding: 15px 0;
 `;
 
-// New wrapper for table scrolling
 export const TableWrapper = styled.div`
   width: 100%;
   max-width: 80%;

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
+
 import {
   FormContainer,
   Title,
@@ -14,24 +17,18 @@ import {
 import { ROUTES } from '../../../constants';
 import { newSignInRequest } from '../../../utils/networkCalls';
 import { useAuth } from '../../../context/auth/useAuth';
-import toast from 'react-hot-toast';
-import { AxiosError } from 'axios';
-
-interface FormData {
-  email: string;
-  password: string;
-}
+import type { LoginFormData } from '../../../utils/interfaces';
 
 const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<FormData>();
+  } = useForm<LoginFormData>();
   const navigate = useNavigate();
   const { setAccessToken } = useAuth();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     try {
       const response = await newSignInRequest(data);
       if (response) {
@@ -43,7 +40,7 @@ const LoginPage: React.FC = () => {
         setAccessToken(accessToken);
         navigate(ROUTES.DASHBOARD);
       }
-    } catch (err: unknown) {
+    } catch (err) {
       toast.error(
         err instanceof AxiosError
           ? err?.response?.data?.message
@@ -65,7 +62,7 @@ const LoginPage: React.FC = () => {
       <FormContainer>
         <Title>Sign In</Title>
         <Title>
-          New to Contactbooks?
+          New to Contact books?
           <LinkedText onClick={handleSignupClick}> Signup here</LinkedText>
         </Title>
         <form onSubmit={handleSubmit(onSubmit)}>

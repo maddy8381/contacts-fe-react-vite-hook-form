@@ -1,6 +1,7 @@
 import React, { type JSX } from 'react';
-import { useAuth } from '../../context/auth/useAuth';
 import { Navigate } from 'react-router-dom';
+
+import { useAuth } from '../../context/auth/useAuth';
 import { ROUTES } from '../../constants';
 
 interface ProtectedRouteProps {

@@ -1,13 +1,17 @@
 import axios from 'axios';
-
+import type {
+  ContactFormData,
+  LoginFormData,
+  SignupFormData
+} from './interfaces';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const newSignUpRequest = async (payload: unknown) => {
+export const newSignUpRequest = async (payload: SignupFormData) => {
   const response = await axios.post(`${API_BASE_URL}/auth/signup`, payload);
   return response.data;
 };
 
-export const newSignInRequest = async (payload: unknown) => {
+export const newSignInRequest = async (payload: LoginFormData) => {
   const response = await axios.post(`${API_BASE_URL}/auth/signin`, payload);
   return response.data;
 };
@@ -32,11 +36,7 @@ export const fetchContactList = async (accessToken: string | null) => {
 
 export const addContact = async (
   accessToken: string | null,
-  payload: {
-    name: string;
-    email: string;
-    mobileNumber: string;
-  }
+  payload: ContactFormData
 ) => {
   const response = await axios.post(
     `${API_BASE_URL}/dashboard/contacts`,
@@ -70,11 +70,7 @@ export const deleteContact = async (
 export const updateContact = async (
   accessToken: string | null,
   contactId: string,
-  payload: {
-    name: string;
-    email: string;
-    mobileNumber: string;
-  }
+  payload: ContactFormData
 ) => {
   const response = await axios.put(
     `${API_BASE_URL}/dashboard/contacts/${contactId}`,
