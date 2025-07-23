@@ -44,7 +44,7 @@ const SignupPage: React.FC = () => {
     } catch (err) {
       toast.error(
         err instanceof AxiosError
-          ? err?.response?.data?.message
+          ? err?.response?.data?.message || 'Something went wrong'
           : 'Something went wrong',
         {
           duration: 4000,

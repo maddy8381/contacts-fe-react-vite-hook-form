@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
     } catch (err) {
       toast.error(
         err instanceof AxiosError
-          ? err?.response?.data?.message
+          ? err?.response?.data?.message || 'Email id or password is incorrect'
           : 'Email id or password is incorrect',
         {
           duration: 4000,

@@ -31,9 +31,11 @@ import {
 import { ROUTES } from '../../constants';
 import AddContact from '../contacts/AddContact';
 import type { IContact, IUser } from '../../utils/interfaces';
+import { useLoader } from '../../context/loader/useLoader';
 
 const Dashboard: React.FC = () => {
   const { accessToken, setAccessToken } = useAuth();
+  const { setLoading, setLoadingMessage } = useLoader();
   const navigate = useNavigate();
   const [userContactList, setUserContactList] = useState<IContact[]>([]);
   const [editingContact, setEditingContact] = useState<IContact | null>(null);
@@ -105,6 +107,8 @@ const Dashboard: React.FC = () => {
   };
 
   const handleDelete = async (contact: IContact, index: number) => {
+    setLoading(true);
+    setLoadingMessage('Deleting contact...');
     try {
       const response = await deleteContact(accessToken, contact._id);
       if (response) {
@@ -119,13 +123,15 @@ const Dashboard: React.FC = () => {
     } catch (err) {
       toast.error(
         err instanceof AxiosError
-          ? err?.response?.data?.message
+          ? err?.response?.data?.message || 'Error in deleting contact'
           : 'Error in deleting contact',
         {
           duration: 4000,
           position: 'bottom-right'
         }
       );
+    } finally {
+      setLoading(false);
     }
   };
 

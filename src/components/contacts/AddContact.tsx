@@ -104,7 +104,8 @@ const AddContact: React.FC<AddContactProps> = ({
     } catch (err) {
       toast.error(
         err instanceof AxiosError
-          ? err?.response?.data?.message
+          ? err?.response?.data?.message ||
+              'Error in adding or updating contact'
           : 'Error in adding or updating contact',
         {
           duration: 4000,
