@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
       if (response) {
         toast.success('Login successfully!', {
           duration: 2000,
-          position: 'top-right'
+          position: 'bottom-right'
         });
         const accessToken = response.accessToken;
         setAccessToken(accessToken);
@@ -50,7 +50,7 @@ const LoginPage: React.FC = () => {
           : 'Email id or password is incorrect',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     }

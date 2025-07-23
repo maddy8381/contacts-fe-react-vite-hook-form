@@ -90,8 +90,8 @@ const AddContact: React.FC<AddContactProps> = ({
         );
         if (response?.success) {
           toast.success('Contact updated successfully!', {
-            duration: 4000,
-            position: 'top-right'
+            duration: 2000,
+            position: 'bottom-right'
           });
           onContactUpdated?.(); // Refresh the contact list
         }
@@ -100,8 +100,8 @@ const AddContact: React.FC<AddContactProps> = ({
         const response = await addContact(accessToken, data);
         if (response?.success) {
           toast.success('Contact added successfully!', {
-            duration: 4000,
-            position: 'top-right'
+            duration: 2000,
+            position: 'bottom-right'
           });
           onContactUpdated?.(); // Refresh the contact list
         }
@@ -115,7 +115,7 @@ const AddContact: React.FC<AddContactProps> = ({
           : 'Error in adding or updating contact',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     } finally {

@@ -82,7 +82,7 @@ export const StyledField = styled.input<{ hasError?: boolean }>`
   }
 
   &::placeholder {
-    color: black;
+    color: #999;
   }
 `;
 

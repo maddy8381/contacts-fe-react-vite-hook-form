@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
           : 'Error fetching contact list',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     }
@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
           : 'Error fetching user details',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     }
@@ -100,7 +100,7 @@ const Dashboard: React.FC = () => {
     navigate(ROUTES.LOGIN);
     toast.success('Logout successfully!', {
       duration: 2000,
-      position: 'top-right'
+      position: 'bottom-right'
     });
   };
 
@@ -124,7 +124,7 @@ const Dashboard: React.FC = () => {
 
         toast.success('Contact deleted successfully!', {
           duration: 2000,
-          position: 'top-right'
+          position: 'bottom-right'
         });
       }
     } catch (err) {
@@ -134,7 +134,7 @@ const Dashboard: React.FC = () => {
           : 'Error in deleting contact',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     }
@@ -150,7 +150,8 @@ const Dashboard: React.FC = () => {
         </UserNameContainer>
       </HeaderBar>
       <MainContent>
-        <Heading>My Contact List</Heading>
+        {userContactList?.length > 0 && <Heading>My Contact List</Heading>}
+        {userContactList?.length === 0 && <Heading>No contacts found</Heading>}
 
         {/* Add Contact Component */}
         <AddContact onContactUpdated={getContactList} />
@@ -165,47 +166,47 @@ const Dashboard: React.FC = () => {
             isEditModalOpen={isEditModalOpen}
           />
         )}
-
-        {/* Wrap the table with TableWrapper for horizontal scrolling */}
-        <TableWrapper>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Email</Th>
-                <Th>Mobile Number</Th>
-                <Th>Action</Th>
-              </Tr>
-            </Thead>
-            <tbody>
-              {userContactList.map((contact: IContact, index) => (
-                <Tr key={contact._id || index}>
-                  <Td>{contact.name}</Td>
-                  <Td>{contact.email}</Td>
-                  <Td>{contact.mobileNumber}</Td>
-                  <Td>
-                    <ActionContainer>
-                      <ActionButton
-                        onClick={() => handleEdit(contact)}
-                        type="edit"
-                        title="Edit Contact"
-                      >
-                        <Edit size={16} />
-                      </ActionButton>
-                      <ActionButton
-                        onClick={() => handleDelete(contact, index)}
-                        type="delete"
-                        title="Delete Contact"
-                      >
-                        <Trash2 size={16} />
-                      </ActionButton>
-                    </ActionContainer>
-                  </Td>
+        {userContactList?.length > 0 && (
+          <TableWrapper>
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>Email</Th>
+                  <Th>Mobile Number</Th>
+                  <Th>Action</Th>
                 </Tr>
-              ))}
-            </tbody>
-          </Table>
-        </TableWrapper>
+              </Thead>
+              <tbody>
+                {userContactList.map((contact: IContact, index) => (
+                  <Tr key={contact._id || index}>
+                    <Td>{contact.name}</Td>
+                    <Td>{contact.email}</Td>
+                    <Td>{contact.mobileNumber}</Td>
+                    <Td>
+                      <ActionContainer>
+                        <ActionButton
+                          onClick={() => handleEdit(contact)}
+                          type="edit"
+                          title="Edit Contact"
+                        >
+                          <Edit size={16} />
+                        </ActionButton>
+                        <ActionButton
+                          onClick={() => handleDelete(contact, index)}
+                          type="delete"
+                          title="Delete Contact"
+                        >
+                          <Trash2 size={16} />
+                        </ActionButton>
+                      </ActionContainer>
+                    </Td>
+                  </Tr>
+                ))}
+              </tbody>
+            </Table>
+          </TableWrapper>
+        )}
       </MainContent>
     </DashboardContainer>
   );

@@ -42,7 +42,7 @@ const SignupPage: React.FC = () => {
         setAccessToken(accessToken);
         toast.success('Signup successful!', {
           duration: 2000,
-          position: 'top-right'
+          position: 'bottom-right'
         });
       }
       navigate(ROUTES.DASHBOARD);
@@ -53,7 +53,7 @@ const SignupPage: React.FC = () => {
           : 'Something went wrong',
         {
           duration: 4000,
-          position: 'top-right'
+          position: 'bottom-right'
         }
       );
     }
