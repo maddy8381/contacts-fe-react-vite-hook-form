@@ -14,6 +14,8 @@ import {
 import { ROUTES } from "../../../constants";
 import { newSignUpRequest } from "../../../utils/networkCalls";
 import { useAuth } from "../../../context/auth/useAuth";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 interface FormData {
   fullName: string;
@@ -33,15 +35,24 @@ const SignupPage: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
-    // Simulate API call
-    const response = await newSignUpRequest(data);
-    if (response) {
-      const accessToken = response.accessToken;
-      setAccessToken(accessToken);
+    try {
+      const response = await newSignUpRequest(data);
+      if (response) {
+        const accessToken = response.accessToken;
+        setAccessToken(accessToken);
+      }
+      navigate(ROUTES.DASHBOARD);
+    } catch (err) {
+      toast.error(
+        err instanceof AxiosError
+          ? err?.response?.data?.message
+          : "Something went wrong",
+        {
+          duration: 4000,
+          position: "top-right",
+        }
+      );
     }
-
-    navigate(ROUTES.DASHBOARD);
   };
 
   const handleSigninClick = () => {

@@ -14,6 +14,8 @@ import {
 import { ROUTES } from "../../../constants";
 import { newSignInRequest } from "../../../utils/networkCalls";
 import { useAuth } from "../../../context/auth/useAuth";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface FormData {
   email: string;
@@ -30,14 +32,24 @@ const LoginPage: React.FC = () => {
   const { setAccessToken } = useAuth();
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
-    const response = await newSignInRequest(data);
-    if (response) {
-      const accessToken = response.accessToken;
-      setAccessToken(accessToken);
-      navigate(ROUTES.DASHBOARD);
+    try {
+      const response = await newSignInRequest(data);
+      if (response) {
+        const accessToken = response.accessToken;
+        setAccessToken(accessToken);
+        navigate(ROUTES.DASHBOARD);
+      }
+    } catch (err: unknown) {
+      toast.error(
+        err instanceof AxiosError
+          ? err?.response?.data?.message
+          : "Email id or password is incorrect",
+        {
+          duration: 4000,
+          position: "top-right",
+        }
+      );
     }
-    // Handle form submission here
   };
 
   const handleSignupClick = () => {
